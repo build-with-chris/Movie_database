@@ -11,12 +11,15 @@ def fetching_movie_data(title):
     omb api according to the title input from the user"""
     url = f"http://www.omdbapi.com/?apikey={APIKEY}&t={title}"
     res = requests.get(url)
+    if res.status_code != 200:
+        return "Failed to retrieve data from the API. Please try again later."
     movie_data = res.json()
+    if movie_data.get("Response") == "False":
+        return "Movie not found. Please try again with a different title."
     try:
         year = movie_data.get("Year", "No year available")
         ratings = movie_data.get("Ratings", [])
         imdb_rating = 0
-
         for rating in ratings:
             if rating["Source"] == "Internet Movie Database":
                 value = rating["Value"]
@@ -25,5 +28,7 @@ def fetching_movie_data(title):
         poster_url = movie_data.get("Poster", "No poster available")
     except TypeError:
         return "Movie not found. Please try again with a different title"
+    except KeyError:
+        return "Error: Missing information in the response data. Please try again."
     return year, imdb_rating, poster_url
 

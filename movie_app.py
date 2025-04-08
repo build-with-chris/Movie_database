@@ -56,11 +56,14 @@ class MovieApp:
         """adding a new movie with the details by only entering the title"""
         title = input("Enter movie title: ")
         values = fetch_movie_data.fetching_movie_data(title)
-        year = values [0]
-        rating = values[1]
-        poster = values [2]
-        self._storage.add_movie(title, year, rating, poster)
-        print("Successfully saved to the Database")
+        if "Movie not found" in values or "Error" in values:
+            print(values)
+            return
+        else:
+            year, rating, poster = values
+            print(self._storage.add_movie(title, year, rating, poster))
+
+
 
     def _command_delete_movie(self):
         title = input("Enter movie title: ")

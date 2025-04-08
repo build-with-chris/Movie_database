@@ -20,19 +20,19 @@ class IStorage(ABC):
     def add_movie(self, title, year, rating, poster="None"):
         """receiving all the arguments from the API"""
         movies = self._load_movies()
-        if title in movies:
-            return False, "You can not add the same title again"
+        if title.title() in movies:
+            return "You can not add the same title again"
         try:
             rating = float(rating)
             if not (0 <= rating <= 10):
-                return False, "The rating must be between 0 and 10"
+                return "The rating must be between 0 and 10"
             year = int(year)
         except ValueError:
-            return False, "Rating must be a number, year must be an integer"
+            return "Rating must be a number, year must be an integer"
 
-        movies[title] = {'year': year, 'rating': rating, 'poster': poster}
+        movies[title.title()] = {'year': year, 'rating': rating, 'poster': poster}
         self._save_movies(movies)
-        return True, f"Movie '{title}' added successfully."
+        return f"Movie '{title}' added successfully."
 
 
     def delete_movie(self, title):
