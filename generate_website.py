@@ -20,12 +20,11 @@ def sterilize_movie_data(title, year, rating, poster_url):
     output += "</div>"
     output += "</li>"
     return output
-    #gathering all the HTML Data needed to display the movies in the right way
 
 def write_new_html(new_code):
     with open('movies.html', 'w') as f:
         f.write(new_code)
 
 def content_temp(html):
-    with open(html, 'r') as f:
+    with open(f'static/{html}', 'r') as f:
         return f.read()

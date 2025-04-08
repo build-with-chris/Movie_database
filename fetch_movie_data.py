@@ -7,11 +7,9 @@ APIKEY = os.getenv("APIKEY")
 
 
 def fetching_movie_data(title):
-    """getting year, rating and poster from the offical
+    """getting year, rating and poster from the official
     omb api according to the title input from the user"""
-    base_url = f"http://www.omdbapi.com/?i=tt3896198&{APIKEY}"
-    movie_title = title
-    url = base_url + "&t=" + movie_title
+    url = f"http://www.omdbapi.com/?apikey={APIKEY}&t={title}"
     res = requests.get(url)
     movie_data = res.json()
     try:
@@ -28,3 +26,4 @@ def fetching_movie_data(title):
     except TypeError:
         return "Movie not found. Please try again with a different title"
     return year, imdb_rating, poster_url
+

@@ -59,7 +59,6 @@ class MovieApp:
         year = values [0]
         rating = values[1]
         poster = values [2]
-        print(title, year, rating, poster)
         self._storage.add_movie(title, year, rating, poster)
         print("Successfully saved to the Database")
 
@@ -117,7 +116,7 @@ class MovieApp:
             print(f"Movie {movie_part} doesn't exist!")
 
     def _command_order_movie(self):
-        '''Creating a new dictionary ordered by its value and display it.'''
+        """Creating a new dictionary ordered by its value and display it."""
         movies = self._storage.list_movies()
         ordered_dictionary = sorted(movies.items(), key=lambda item: item[1]["rating"], reverse=True)
         new_dict = dict(ordered_dictionary)
