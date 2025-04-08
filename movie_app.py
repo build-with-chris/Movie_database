@@ -1,6 +1,8 @@
 import fetch_movie_data
 import random
 import generate_website
+from statistics import mean
+
 
 
 class MovieApp:
@@ -20,8 +22,7 @@ class MovieApp:
         11: self._command_filter_movies,
     }
 
-    def _command_end(self):
-       pass
+
     def menu(self):
         '''updated menu with all actions available '''
         print("********** Chris' Movies Database **********")
@@ -41,15 +42,9 @@ class MovieApp:
             print("Please enter a valid integer.")
         print()
 
-    def _command_generate_website(self):
-        db = self._storage._load_movies()
-        template = generate_website.content_temp('index_template.html')
-        movie_cards = generate_website.get_all_movies(db)
-        final_html = template.replace("__TEMPLATE_MOVIE_GRID__", movie_cards)
-        generate_website.write_new_html(final_html)
-        print("Website was generated successfully.")
 
     def _command_list_movies(self):
+        """Listing movies with their year and rating"""
         movies = self._storage.list_movies()
         total_movies = len(movies)
         print(f'\n{total_movies} movies in total:\n')
@@ -58,12 +53,12 @@ class MovieApp:
             print(f' {name} ({movies[name]["year"]}) : {movies[name]["rating"]}')
 
     def _command_add_movie(self):
+        """adding a new movie with the details by only entering the title"""
         title = input("Enter movie title: ")
         values = fetch_movie_data.fetching_movie_data(title)
         year = values [0]
         rating = values[1]
         poster = values [2]
-
         print(title, year, rating, poster)
         self._storage.add_movie(title, year, rating, poster)
         print("Successfully saved to the Database")
@@ -74,13 +69,30 @@ class MovieApp:
         print(message)
 
     def _command_update_movie(self):
+        """Since we fetch the movie data from the title, this function is just a placeholder"""
         title = input("Enter movie title: ")
         new_rating = float(input("Enter new movie rating (0-10): "))
         sucess, message = self._storage.update_movie(title, new_rating)
 
 
     def _command_movie_stats(self):
-        message = self._storage.stats_movie()
+        """calculates and prints basic statistics"""
+        movies = self._storage.list_movies()
+        ratings = [m["rating"] for m in movies.values()]
+        if not ratings:
+            print("No movies found.")
+            return
+        print(f"Average rating: {mean(ratings)}")
+        best = max(ratings)
+        worst = min(ratings)
+        print("Best movies:")
+        for t, m in movies.items():
+            if m['rating'] == best:
+                print(f"{t} ({m['year']}): {m['rating']}")
+        print("Worst movies:")
+        for t, m in movies.items():
+            if m['rating'] == worst:
+                print(f"{t} ({m['year']}): {m['rating']}")
 
     def _command_random_choice(self):
         '''getting a random choice from the data'''
@@ -112,6 +124,17 @@ class MovieApp:
         for name in new_dict:
             print(f'{name} ({new_dict[name]["year"]}): {new_dict[name]["rating"]}')
 
+
+    def _command_generate_website(self):
+        """generates a website based on the index_template.html and style.css"""
+        db = self._storage._load_movies()
+        template = generate_website.content_temp('index_template.html')
+        movie_cards = generate_website.get_all_movies(db)
+        final_html = template.replace("__TEMPLATE_MOVIE_GRID__", movie_cards)
+        generate_website.write_new_html(final_html)
+        print("Website was generated successfully.")
+
+
     def _command_order_by_year(self):
         """we check if the input is valid n/y, convert the movie year into an int
         and order the dictionary by its value year"""
@@ -137,6 +160,7 @@ class MovieApp:
                 print("Enter Y or N")
 
     def _command_filter_movies(self):
+        """filter the movies by rating and year """
         movies = self._storage.list_movies()
         global valid_start_year, valid_end_year
         min_rating = input("Enter minimum rating (leave blank for no minimum rating): ")
@@ -187,14 +211,13 @@ class MovieApp:
 
 
     def run(self):
-        #print menu
-        # Get use command
-      while True:
+        """prints the menu and gets the user command and executes it with the according
+        dictionary in the beginning of the file"""
+        while True:
           user_input = self.menu()
           if user_input == 0:
               print("Bye")
               break
-          # Execute command
           action = self._actions.get(user_input)
           if action:
               action()

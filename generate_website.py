@@ -1,4 +1,6 @@
 def get_all_movies(database):
+    """iterating through all movies in the database to
+    sterilize the output"""
     output = ''
     for title, data in database.items():
         year = data.get('year', 'N/A')
@@ -8,6 +10,7 @@ def get_all_movies(database):
     return output
 
 def sterilize_movie_data(title, year, rating, poster_url):
+    """Bringing the fetched movie data into an HTML/ CSS-conform format"""
     output = ''
     output += "<li>"
     output += "<div class='movie'>"
