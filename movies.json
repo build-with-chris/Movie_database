@@ -1,0 +1,78 @@
+{
+    "The Shawshank Redemption": {
+        "rating": 9.5,
+        "year": 1999
+    },
+    "Frankenstein": {
+        "rating": 9.5,
+        "year": 1999
+    },
+    "Pulp Fiction": {
+        "rating": 8.8,
+        "year": 2020
+    },
+    "The Room": {
+        "rating": 3.6,
+        "year": 2002
+    },
+    "The Godfather": {
+        "rating": 9.2,
+        "year": 2001
+    },
+    "The Godfather: Part II": {
+        "rating": 9.0,
+        "year": 2005
+    },
+    "The Dark Knight": {
+        "rating": 9.0,
+        "year": 2006
+    },
+    "12 Angry Men": {
+        "rating": 8.9,
+        "year": 2010
+    },
+    "Everything Everywhere All At Once": {
+        "rating": 8.9,
+        "year": 2018
+    },
+    "Forrest Gump": {
+        "rating": 8.8,
+        "year": 2002
+    },
+    "Star Wars: Episode V": {
+        "rating": 5.0,
+        "year": 2006
+    },
+    "Godess": {
+        "year": "1999",
+        "rating": 3.0
+    },
+    "drfg": {
+        "year": "324",
+        "rating": 3.0
+    },
+    "fgdf": {
+        "year": "123",
+        "rating": 12.0
+    },
+    "ert": {
+        "year": "213",
+        "rating": 2.0
+    },
+    "dfgsd": {
+        "year": "1234",
+        "rating": 43.0
+    },
+    "dsfdv": {
+        "year": "43",
+        "rating": 1.0
+    },
+    "erte": {
+        "year": "23",
+        "rating": 23.0
+    },
+    "New title": {
+        "year": 1999,
+        "rating": 8.1
+    }
+}
