@@ -16,6 +16,9 @@ class IStorage(ABC):
     def list_movies(self):
         return self._load_movies()
 
+#abstracte methods in interface:
+#    docstring mit pass
+
 
     def add_movie(self, title, year, rating, poster="None"):
         """receiving all the arguments from the API"""

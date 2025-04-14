@@ -8,6 +8,7 @@ class StorageCsv(IStorage):
 
     def _load_movies(self):
         movies = {}
+        #testen mit try herausnehmen.
         try:
             with open(self.file_path, mode='r', newline='', encoding='utf-8') as file:
                 reader = csv.DictReader(file)

@@ -1,3 +1,5 @@
+from flask import Flask, render_template
+
 def get_all_movies(database):
     """iterating through all movies in the database to
     sterilize the output"""

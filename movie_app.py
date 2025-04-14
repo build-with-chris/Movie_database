@@ -205,11 +205,13 @@ class MovieApp:
         for movie in movies.values():
             movie["year"] = int(movie["year"])
         for title in movies:
-            if ((valid_min_rating is None or movies[title]["rating"] >= valid_min_rating) and
-                    (valid_start_year is None or movies[title]["year"] >= valid_start_year) and
-                    (valid_end_year is None or movies[title]["year"] <= valid_start_year)):
+            if self.all_userinputs_validate(valid_min_rating, movies[title]):
                 print(f'{title} ({movies[title]["year"]}): {movies[title]["rating"]}')
 
+    def all_userinputs_validate(self, valid_min_rating, title):
+        return ((valid_min_rating is None or title["rating"] >= valid_min_rating) and
+                        (valid_start_year is None or title["year"] >= valid_start_year) and
+                        (valid_end_year is None or title["year"] <= valid_start_year))
 
 
     def run(self):
