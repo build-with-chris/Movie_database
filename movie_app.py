@@ -45,12 +45,8 @@ class MovieApp:
 
     def _command_list_movies(self):
         """Listing movies with their year and rating"""
-        movies = self._storage.list_movies()
-        total_movies = len(movies)
-        print(f'\n{total_movies} movies in total:\n')
-        movie_names = [name for name in movies]
-        for name in movie_names:
-            print(f' {name} ({movies[name]["year"]}) : {movies[name]["rating"]}')
+        return self._storage.list_movies()
+
 
     def _command_add_movie(self):
         """adding a new movie with the details by only entering the title"""
@@ -64,11 +60,12 @@ class MovieApp:
             print(self._storage.add_movie(title, year, rating, poster))
 
 
-
     def _command_delete_movie(self):
+        """giving a success message if movie is found and deleted. And vice versa"""
         title = input("Enter movie title: ")
         success, message = self._storage.delete_movie(title)
         print(message)
+
 
     def _command_update_movie(self):
         """Since we fetch the movie data from the title, this function is just a placeholder"""
@@ -79,12 +76,9 @@ class MovieApp:
 
     def _command_movie_stats(self):
         """calculates and prints basic statistics"""
-        movies = self._storage.list_movies()
+        movies = self._storage._load_movies()
         ratings = [m["rating"] for m in movies.values()]
-        if not ratings:
-            print("No movies found.")
-            return
-        print(f"Average rating: {mean(ratings)}")
+        print(f"Average rating: {mean(ratings):.2f}")
         best = max(ratings)
         worst = min(ratings)
         print("Best movies:")
@@ -96,9 +90,10 @@ class MovieApp:
             if m['rating'] == worst:
                 print(f"{t} ({m['year']}): {m['rating']}")
 
+
     def _command_random_choice(self):
-        '''getting a random choice from the data'''
-        movies = self._storage.list_movies()
+        """getting a random choice from the data"""
+        movies = self._storage._load_movies()
         movie_list = [name for name in movies]
         suggestion = random.choice(movie_list)
         print(f"Your movie for tonight: {suggestion}({movies[suggestion]["year"]})"
@@ -108,7 +103,7 @@ class MovieApp:
     def _command_search_movie(self):
         """searching for the movie. It will detect the movie even with different upper or lowercase
         or just parts of the movie name"""
-        movies = self._storage.list_movies()
+        movies = self._storage._load_movies()
         movie_part = input("Enter part of movie name: ")
         found = False
         for name in movies:
@@ -120,7 +115,7 @@ class MovieApp:
 
     def _command_order_movie(self):
         """Creating a new dictionary ordered by its value and display it."""
-        movies = self._storage.list_movies()
+        movies = self._storage._load_movies()
         ordered_dictionary = sorted(movies.items(), key=lambda item: item[1]["rating"], reverse=True)
         new_dict = dict(ordered_dictionary)
         for name in new_dict:
