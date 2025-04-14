@@ -5,7 +5,7 @@ from storage_json import StorageJson
 
 def main():
     """initialize the storage and start the programm"""
-    storage = StorageJson('data/movies.json')
+    storage = StorageCsv('data/movies.csv')
     movie_app = MovieApp(storage)
     movie_app.run()
 

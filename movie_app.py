@@ -23,6 +23,17 @@ class MovieApp:
     }
 
 
+    @staticmethod
+    def get_input(prompt, type_func):
+        while True:
+            value = input(prompt).strip()
+            if value == "":
+                return None
+            try:
+                return type_func(value)
+            except ValueError:
+                print(f"Please enter a valid {type_func.__name__}.")
+
     def menu(self):
         '''updated menu with all actions available '''
         print("********** Chris' Movies Database **********")
@@ -135,7 +146,7 @@ class MovieApp:
     def _command_order_by_year(self):
         """we check if the input is valid n/y, convert the movie year into an int
         and order the dictionary by its value year"""
-        movies = self._storage.list_movies()
+        movies = self._storage._load_movies()
         while True:
             ordered_by = input("Do you want the latest movies first? (Y/N)")
             if ordered_by.lower() == "y" or ordered_by.lower() == "n":
@@ -156,57 +167,33 @@ class MovieApp:
             else:
                 print("Enter Y or N")
 
+
     def _command_filter_movies(self):
         """filter the movies by rating and year """
-        movies = self._storage.list_movies()
-        global valid_start_year, valid_end_year
-        min_rating = input("Enter minimum rating (leave blank for no minimum rating): ")
-        while True:
-            try:
-                if min_rating != "":
-                    valid_min_rating = float(min_rating)
-                    break
-                else:
-                    valid_min_rating = None
-                    break
-            except ValueError:
-                print("please enter a number.")
-                min_rating = input("Enter minimum rating (leave blank for no minimum rating): ")
-        start_year = input("Enter start year (leave blank for no start year): ")
-        end_year = input("Enter end year (leave blank for no end year): ")
-        while True:
-            try:
-                if start_year != "":
-                    valid_start_year = int(start_year)
-                    break
-                else:
-                    valid_start_year = None
-                    break
-            except ValueError:
-                print("please enter an integer.")
-                start_year = input("Enter start year (leave blank for no start year): ")
-        while True:
-            try:
-                if end_year != "":
-                    valid_end_year = int(end_year)
-                    break
-                else:
-                    valid_end_year = None
-                    break
-            except ValueError:
-                print("please enter an integer.")
-                end_year = input("Enter end year (leave blank for no end year): ")
-        movie_names = [names for names in movies]
-        for movie in movies.values():
-            movie["year"] = int(movie["year"])
-        for title in movies:
-            if self.all_userinputs_validate(valid_min_rating, movies[title]):
-                print(f'{title} ({movies[title]["year"]}): {movies[title]["rating"]}')
+        movies = self._storage._load_movies()
 
-    def all_userinputs_validate(self, valid_min_rating, title):
-        return ((valid_min_rating is None or title["rating"] >= valid_min_rating) and
-                        (valid_start_year is None or title["year"] >= valid_start_year) and
-                        (valid_end_year is None or title["year"] <= valid_start_year))
+        min_rating = self.get_input("Enter minimum rating (leave blank for no minimum rating): ", float)
+        start_year = self.get_input("Enter start year (leave blank for no start year): ", int)
+        end_year = self.get_input("Enter end year (leave blank for no end year): ", int)
+
+        for movie in movies.values():
+            try:
+                movie["year"] = int(movie["year"])
+                movie["rating"] = float(movie["rating"])
+            except (ValueError, KeyError):
+                print(f"Skipping movie with invalid data: {movie}")
+                continue
+
+        for title, movie in movies.items():
+            year = movie.get("year")
+            rating = movie.get("rating")
+
+            if (
+                    (min_rating is None or rating >= min_rating) and
+                    (start_year is None or year >= start_year) and
+                    (end_year is None or year <= end_year)
+            ):
+                print(f'{title} ({year}): {rating}')
 
 
     def run(self):
