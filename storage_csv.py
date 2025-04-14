@@ -8,7 +8,6 @@ class StorageCsv(IStorage):
 
     def _load_movies(self):
         movies = {}
-        #testen mit try herausnehmen.
         try:
             with open(self.file_path, mode='r', newline='', encoding='utf-8') as file:
                 reader = csv.DictReader(file)
@@ -17,7 +16,8 @@ class StorageCsv(IStorage):
                     movies[title] = {
                         'year': int(row['year']),
                         'rating': float(row['rating']),
-                        'poster': row.get('poster', 'None')
+                        'poster': row.get('poster', 'None'),
+                        'imdb_url': row.get('imdb_url',"")
                     }
         except FileNotFoundError:
             pass  # Datei existiert noch nicht
@@ -25,15 +25,16 @@ class StorageCsv(IStorage):
 
     def _save_movies(self, movies):
         with open(self.file_path, mode='w', newline='', encoding='utf-8') as file:
-            fieldnames = ['title', 'year', 'rating', 'poster']
+            fieldnames = ['title', 'year', 'rating', 'poster', 'imdb_url']
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             writer.writeheader()
             for title, info in movies.items():
                 writer.writerow({
                     'title': title,
-                    'year': info['year'],
+                    'year': info.get('year',''),
                     'rating': info.get('rating', 0),
-                    'poster': info.get('poster', 'None')
+                    'poster': info.get('poster', 'None'),
+                    "imdb_url": info.get("imdb_url", "")
                 })
 
 
@@ -46,7 +47,7 @@ class StorageCsv(IStorage):
             print(f' {name} ({movies[name]["year"]}) : {movies[name]["rating"]}')
 
 
-    def add_movie(self, title, year, rating, poster="None"):
+    def add_movie(self, title, year, rating, imdb_url, poster="None"):
         """receiving all the arguments from the API, adding movies with a
         rating between 0 and 10 and add them in CSV or JSON"""
         movies = self._load_movies()
@@ -60,7 +61,7 @@ class StorageCsv(IStorage):
         except ValueError:
             return "Rating must be a number, year must be an integer"
 
-        movies[title.title()] = {'year': year, 'rating': rating, 'poster': poster}
+        movies[title.title()] = {'year': year, 'rating': rating, 'poster': poster, 'imdb_url': imdb_url}
         self._save_movies(movies)
         return f"Movie '{title}' added successfully."
 
@@ -75,15 +76,11 @@ class StorageCsv(IStorage):
         return False, f"Movie '{title}' does not exist"
 
 
-    def update_movie(self, title, rating):
+    def update_movie(self, title, notes):
         movies = self._load_movies()
         found_key = next((k for k in movies if k.lower() == title.lower()), None)
         if found_key:
-            try:
-                rating = float(rating)
-            except ValueError:
-                return False, "Rating must be a number"
-            movies[found_key]['rating'] = rating
+            movies[found_key]['notes'] = notes
             self._save_movies(movies)
             return True, f"Movie '{title}' successfully updated"
         return False, f"Movie '{title}' does not exist"

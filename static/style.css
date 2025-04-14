@@ -36,6 +36,7 @@ body {
 
 .movie {
   width: 140px;
+  position: relative;
 }
 
 .movie-title,
@@ -52,9 +53,53 @@ body {
   color: #999;
 }
 
+.movie-rating {
+    position: absolute;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffcc00;
+  color: #000;
+  font-size: 0.85em;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin: 8px auto 0;
+  text-align: center;
+  z-index: 2;
+}
 
 .movie-poster {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     width: 128px;
     height: 193px;
+}
+
+
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  text-align: center;
+  padding: 6px 10px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%; /* über dem Poster */
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.3s ease;
+  font-size: 0.75em;
+  max-width: 250px;
+  white-space: normal;
+}
+
+.movie:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.movie a {
+cursor: pointer;
 }

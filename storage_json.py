@@ -27,7 +27,7 @@ class StorageJson(IStorage):
         for name in movie_names:
             print(f' {name} ({movies[name]["year"]}) : {movies[name]["rating"]}')
 
-    def add_movie(self, title, year, rating, poster="None"):
+    def add_movie(self, title, year, rating, imdb_url, poster="None"):
         """receiving all the arguments from the API, adding movies with a
         rating between 0 and 10 and add them in CSV or JSON"""
         movies = self._load_movies()
@@ -36,12 +36,14 @@ class StorageJson(IStorage):
         try:
             rating = float(rating)
             if not (0 <= rating <= 10):
+
                 return "The rating must be between 0 and 10"
-            year = int(year)
+            year = ''.join(filter(str.isdigit, str(year)))
+            year = int(year) if year else 0
         except ValueError:
             return "Rating must be a number, year must be an integer"
 
-        movies[title.title()] = {'year': year, 'rating': rating, 'poster': poster}
+        movies[title.title()] = {'year': year, 'rating': rating, 'poster': poster, 'imdb_url': imdb_url}
         self._save_movies(movies)
         return f"Movie '{title}' added successfully."
 
@@ -55,16 +57,11 @@ class StorageJson(IStorage):
             return True, f"Movie '{title}' successfully deleted"
         return False, f"Movie '{title}' does not exist"
 
-
-    def update_movie(self, title, rating):
+    def update_movie(self, title, notes):
         movies = self._load_movies()
         found_key = next((k for k in movies if k.lower() == title.lower()), None)
         if found_key:
-            try:
-                rating = float(rating)
-            except ValueError:
-                return False, "Rating must be a number"
-            movies[found_key]['rating'] = rating
+            movies[found_key]['notes'] = notes
             self._save_movies(movies)
             return True, f"Movie '{title}' successfully updated"
         return False, f"Movie '{title}' does not exist"

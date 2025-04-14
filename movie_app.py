@@ -67,8 +67,8 @@ class MovieApp:
             print(values)
             return
         else:
-            year, rating, poster = values
-            print(self._storage.add_movie(title, year, rating, poster))
+            year, rating, poster, imdb_url = values
+            print(self._storage.add_movie(title, year, rating, poster, imdb_url))
 
 
     def _command_delete_movie(self):
@@ -81,8 +81,8 @@ class MovieApp:
     def _command_update_movie(self):
         """Since we fetch the movie data from the title, this function is just a placeholder"""
         title = input("Enter movie title: ")
-        new_rating = float(input("Enter new movie rating (0-10): "))
-        sucess, message = self._storage.update_movie(title, new_rating)
+        notes = input("Enter movie notes: ")
+        sucess, message = self._storage.update_movie(title, notes)
 
 
     def _command_movie_stats(self):

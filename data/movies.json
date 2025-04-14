@@ -1,12 +1,81 @@
 {
-    "The Shawshank Redemption": {
-        "rating": 9.5,
-        "year": 1999,
-        "poster": "https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_SX300.jpg"
+    "Frankenstein": {
+        "year": 1931,
+        "rating": 7.8,
+        "poster": "https://m.media-amazon.com/images/M/MV5BNDhjNjgxN2EtZGIxZC00NDQzLThmOWMtZDgwNmYwZDQ3MzZiXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdb_url": "https://www.imdb.com/title/tt0021884/"
+    },
+    "Nomadland": {
+        "year": 2020,
+        "rating": 7.3,
+        "poster": "https://m.media-amazon.com/images/M/MV5BZjU3MGYwZjAtNmIzZC00YzkzLWI1NTAtMDQ3YjQzYmRlNjJlXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdb_url": "https://www.imdb.com/title/tt9770150/",
+        "notes": "Sehr bewegend"
     },
     "12 Angry Men": {
         "year": 1957,
         "rating": 9.0,
-        "poster": "https://m.media-amazon.com/images/M/MV5BYjE4NzdmOTYtYjc5Yi00YzBiLWEzNDEtNTgxZGQ2MWVkN2NiXkEyXkFqcGc@._V1_SX300.jpg"
+        "poster": "https://m.media-amazon.com/images/M/MV5BYjE4NzdmOTYtYjc5Yi00YzBiLWEzNDEtNTgxZGQ2MWVkN2NiXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdb_url": "https://www.imdb.com/title/tt0050083/"
+    },
+    "The Amateur": {
+        "year": 1981,
+        "rating": 5.8,
+        "poster": "https://m.media-amazon.com/images/M/MV5BMWJhNmFmMjAtYjVmZi00N2QxLWIyMjctOTc5MjUwNjM2MGYxXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdb_url": "https://www.imdb.com/title/tt0082005/"
+    },
+    "Ziemlich Beschissene Freunde": {
+        "year": 2013,
+        "rating": 0.0,
+        "poster": "https://s2.qwant.com/thumbr/474x711/4/8/40532943d13fbdaf8ca7370a42729118071213994e016b1df5e0ba0c475ec6/th.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%3Fid%3DOIP.rQdMu0zwytqjkxEA5wZUAwHaLH%26pid%3DApi&q=0&b=1&p=0&a=0",
+        "imdb_url": "https://www.imdb.com/title/tt5082822/"
+    },
+    "Don'T Look Up": {
+        "year": 2021,
+        "rating": 7.2,
+        "poster": "https://m.media-amazon.com/images/M/MV5BMjhhNWFjNzctYTJjOS00MDc0LThiNjItZmM0ZDVmMWViY2UzXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdb_url": "https://www.imdb.com/title/tt11286314/"
+    },
+    "Ant Man": {
+        "year": 2015,
+        "rating": 0.0,
+        "poster": "https://s2.qwant.com/thumbr/474x711/4/8/40532943d13fbdaf8ca7370a42729118071213994e016b1df5e0ba0c475ec6/th.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%3Fid%3DOIP.rQdMu0zwytqjkxEA5wZUAwHaLH%26pid%3DApi&q=0&b=1&p=0&a=0",
+        "imdb_url": "https://www.imdb.com/title/tt17977952/"
+    },
+    "The Father": {
+        "year": 2020,
+        "rating": 8.2,
+        "poster": "https://m.media-amazon.com/images/M/MV5BYzUxMDAyMDAtNzIyZi00OGQ1LTllMjEtYzRjOThkZTUxNTliXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdb_url": "https://www.imdb.com/title/tt10272386/"
+    },
+    "White Lotus": {
+        "year": 2017,
+        "rating": 0.0,
+        "poster": "https://m.media-amazon.com/images/M/MV5BMTdiM2MyMjgtYmVmMC00MzRiLWIzZmYtMjU3MjE0YmNkODA5XkEyXkFqcGdeQXVyMjA3NzMzODQ@._V1_SX300.jpg",
+        "imdb_url": "https://www.imdb.com/title/tt5594636/"
+    },
+    "Reacher": {
+        "year": 2022,
+        "rating": 8.0,
+        "poster": "https://m.media-amazon.com/images/M/MV5BMzdjYWZlMDQtYzdhNi00NmRlLTg2NzUtMTI3MWFhZDliNjBiXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdb_url": "https://www.imdb.com/title/tt9288030/"
+    },
+    "Invincible": {
+        "year": 2021,
+        "rating": 8.7,
+        "poster": "https://m.media-amazon.com/images/M/MV5BZjE4ZDU4ZjMtZjliYS00M2ZmLThkNTItN2U3MmJjOGU0NmIxXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdb_url": "https://www.imdb.com/title/tt6741278/"
+    },
+    "Stranger Things": {
+        "year": 20162025,
+        "rating": 8.7,
+        "poster": "https://m.media-amazon.com/images/M/MV5BMjE2N2MyMzEtNmU5NS00OTI0LTlkNTMtMWM1YWYyNmU4NmY0XkEyXkFqcGc@._V1_SX300.jpg",
+        "imdb_url": "https://www.imdb.com/title/tt4574334/"
+    },
+    "Der Pate": {
+        "year": 1972,
+        "rating": 0.0,
+        "poster": "https://s2.qwant.com/thumbr/474x711/4/8/40532943d13fbdaf8ca7370a42729118071213994e016b1df5e0ba0c475ec6/th.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%3Fid%3DOIP.rQdMu0zwytqjkxEA5wZUAwHaLH%26pid%3DApi&q=0&b=1&p=0&a=0",
+        "imdb_url": "https://www.imdb.com/title/tt21752460/"
     }
 }

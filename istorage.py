@@ -20,7 +20,7 @@ class IStorage(ABC):
 
 
     @abstractmethod
-    def add_movie(self, title, year, rating, poster="None"):
+    def add_movie(self, title, year, rating, imdb_url, poster="None"):
         """receiving all the arguments from the API, adding movies with a
         rating between 0 and 10 and add them in CSV or JSON"""
         pass
