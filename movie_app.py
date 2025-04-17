@@ -34,6 +34,7 @@ class MovieApp:
             except ValueError:
                 print(f"Please enter a valid {type_func.__name__}.")
 
+
     def menu(self):
         '''updated menu with all actions available '''
         print(f"********** {self._username}' Movies Database **********")

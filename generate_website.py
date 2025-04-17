@@ -11,6 +11,7 @@ def get_all_movies(database):
         output += sterilize_movie_data(title, rating, year, movie_notes, poster_url, imbd_url)
     return output
 
+
 def sterilize_movie_data(title, rating, year, movie_notes, poster_url, imdb_url):
     """Bringing the fetched movie data into an HTML/ CSS-conform format"""
     output = ''
@@ -29,9 +30,11 @@ def sterilize_movie_data(title, rating, year, movie_notes, poster_url, imdb_url)
     output += "</li>"
     return output
 
+
 def write_new_html(new_code):
     with open('movies.html', 'w') as f:
         f.write(new_code)
+
 
 def content_temp(html):
     with open(f'static/{html}', 'r') as f:

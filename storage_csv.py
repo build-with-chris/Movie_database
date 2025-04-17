@@ -3,10 +3,13 @@ import csv
 
 
 class StorageCsv(IStorage):
+    """Userinterface for Csv files"""
     def __init__(self, file_path):
         self.file_path = file_path
 
+
     def _load_movies(self):
+        """get all the relevant data from the file and return them"""
         movies = {}
         try:
             with open(self.file_path, mode='r', newline='', encoding='utf-8') as file:
@@ -23,7 +26,9 @@ class StorageCsv(IStorage):
             pass  # Datei existiert noch nicht
         return movies
 
+
     def _save_movies(self, movies):
+        """safe all the movies of the current csv"""
         with open(self.file_path, mode='w', newline='', encoding='utf-8') as file:
             fieldnames = ['title', 'year', 'rating', 'poster', 'imdb_url']
             writer = csv.DictWriter(file, fieldnames=fieldnames)
@@ -39,6 +44,7 @@ class StorageCsv(IStorage):
 
 
     def list_movies(self):
+        """prints the name, year and rating for each movie in the file"""
         movies = self._load_movies()
         total_movies = len(movies)
         print(f'\n{total_movies} movies in total:\n')
@@ -49,7 +55,7 @@ class StorageCsv(IStorage):
 
     def add_movie(self, title, year, rating, imdb_url, poster="None"):
         """receiving all the arguments from the API, adding movies with a
-        rating between 0 and 10 and add them in CSV or JSON"""
+        rating between 0 and 10 and add them in CSV"""
         movies = self._load_movies()
         key = title.strip().lower()
         if key in (k.lower() for k in movies.keys()):
@@ -78,6 +84,7 @@ class StorageCsv(IStorage):
 
 
     def update_movie(self, title, notes):
+        """adds a comment to the movie, if it exists in the DB"""
         movies = self._load_movies()
         found_key = next((k for k in movies if k.lower() == title.lower()), None)
         if found_key:
