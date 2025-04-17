@@ -51,7 +51,8 @@ class StorageCsv(IStorage):
         """receiving all the arguments from the API, adding movies with a
         rating between 0 and 10 and add them in CSV or JSON"""
         movies = self._load_movies()
-        if title.title() in movies:
+        key = title.strip().lower()
+        if key in (k.lower() for k in movies.keys()):
             return "You can not add the same title again"
         try:
             rating = float(rating)
@@ -61,7 +62,7 @@ class StorageCsv(IStorage):
         except ValueError:
             return "Rating must be a number, year must be an integer"
 
-        movies[title.title()] = {'year': year, 'rating': rating, 'poster': poster, 'imdb_url': imdb_url}
+        movies[title] = {'year': year, 'rating': rating, 'poster': poster, 'imdb_url': imdb_url}
         self._save_movies(movies)
         return f"Movie '{title}' added successfully."
 

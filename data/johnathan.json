@@ -1,0 +1,26 @@
+{
+    "Frankenstein": {
+        "year": 1931,
+        "rating": 7.8,
+        "poster": "https://m.media-amazon.com/images/M/MV5BNDhjNjgxN2EtZGIxZC00NDQzLThmOWMtZDgwNmYwZDQ3MzZiXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdb_url": "https://www.imdb.com/title/tt0021884/"
+    },
+    "12 Angry Men": {
+        "year": 1957,
+        "rating": 9.0,
+        "poster": "https://m.media-amazon.com/images/M/MV5BYjE4NzdmOTYtYjc5Yi00YzBiLWEzNDEtNTgxZGQ2MWVkN2NiXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdb_url": "https://www.imdb.com/title/tt0050083/"
+    },
+    "Pulp Fiction": {
+        "year": 1994,
+        "rating": 8.9,
+        "poster": "https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdb_url": "https://www.imdb.com/title/tt0110912/"
+    },
+    "Nomadland": {
+        "year": 2020,
+        "rating": 7.3,
+        "poster": "https://m.media-amazon.com/images/M/MV5BZjU3MGYwZjAtNmIzZC00YzkzLWI1NTAtMDQ3YjQzYmRlNjJlXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdb_url": "https://www.imdb.com/title/tt9770150/"
+    }
+}

@@ -19,6 +19,7 @@ def fetching_movie_data(title):
     if movie_data.get("Response") == "False":
         return "Movie not found. Please try again with a different title."
     try:
+        title_from_api = movie_data.get("Title")
         year = movie_data.get("Year", "No year available")
         ratings = movie_data.get("Ratings", 0)
         imdb_id = movie_data.get("imdbID", "")
@@ -34,5 +35,5 @@ def fetching_movie_data(title):
             poster_url = "https://s2.qwant.com/thumbr/474x711/4/8/40532943d13fbdaf8ca7370a42729118071213994e016b1df5e0ba0c475ec6/th.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%3Fid%3DOIP.rQdMu0zwytqjkxEA5wZUAwHaLH%26pid%3DApi&q=0&b=1&p=0&a=0"
     except KeyError:
         return "Error: Missing information in the response data. Please try again."
-    return year, imdb_rating, imdb_url, poster_url
+    return title_from_api, year, imdb_rating, imdb_url, poster_url
 

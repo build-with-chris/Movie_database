@@ -9,21 +9,30 @@ parser = argparse.ArgumentParser(description='file in csv or json format, that '
                                              'contains your movie database')
 parser.add_argument('file', type=str, help='Which database would you like to connect')
 args = parser.parse_args()
+import os
 #arg = sys.argv[1]
 
 
 
-def main(arg):
+def main(filename):
     """initialize the storage and start the programm
     the programm chooses csv or json depending on the sys.argv ending"""
-    arg_ending = arg.split(".")[-1].lower()
-    if arg_ending == "csv":
-        storage = StorageCsv('data/movies.csv')
-    elif arg_ending == "json":
-        storage = StorageJson('data/movies.json')
+    filepath = f'./data/{filename}'
+    file_extension = filename.split(".")[-1].lower()
+    if not os.path.exists(filepath):
+        with open(filepath, "w") as new_file:
+            if file_extension == "csv":
+                new_file.write("title,year,rating,poster,imdb_url\n")
+            elif file_extension == "json":
+                new_file.write("{}")
+
+
+    if file_extension == "csv":
+        storage = StorageCsv(filepath)
+    elif file_extension == "json":
+        storage = StorageJson(filepath)
     else:
-        print("invalid argument")
-        return
+        print("unsupported format ")
     movie_app = MovieApp(storage)
     movie_app.run()
 

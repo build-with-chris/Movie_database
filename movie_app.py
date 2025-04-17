@@ -1,7 +1,7 @@
 import fetch_movie_data
 import random
 import generate_website
-from statistics import mean
+from statistics import median
 
 
 
@@ -67,8 +67,8 @@ class MovieApp:
             print(values)
             return
         else:
-            year, rating, poster, imdb_url = values
-            print(self._storage.add_movie(title, year, rating, poster, imdb_url))
+            title_from_api, year, rating, poster, imdb_url = values
+            print(self._storage.add_movie(title_from_api, year, rating, poster, imdb_url))
 
 
     def _command_delete_movie(self):
@@ -89,7 +89,7 @@ class MovieApp:
         """calculates and prints basic statistics"""
         movies = self._storage._load_movies()
         ratings = [m["rating"] for m in movies.values()]
-        print(f"Average rating: {mean(ratings):.2f}")
+        print(f"Median rating: {median(ratings)}")
         best = max(ratings)
         worst = min(ratings)
         print("Best movies:")

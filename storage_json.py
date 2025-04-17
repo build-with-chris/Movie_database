@@ -1,5 +1,6 @@
 from istorage import IStorage
 import json
+import fetch_movie_data
 
 
 class StorageJson(IStorage):
@@ -27,11 +28,12 @@ class StorageJson(IStorage):
         for name in movie_names:
             print(f' {name} ({movies[name]["year"]}) : {movies[name]["rating"]}')
 
-    def add_movie(self, title, year, rating, imdb_url, poster="None"):
+    def add_movie(self, original_title, year, rating, imdb_url, poster="None"):
         """receiving all the arguments from the API, adding movies with a
         rating between 0 and 10 and add them in CSV or JSON"""
         movies = self._load_movies()
-        if title.title() in movies:
+        key = original_title.strip().lower()
+        if key in (k.lower() for k in movies.keys()):
             return "You can not add the same title again"
         try:
             rating = float(rating)
@@ -43,9 +45,9 @@ class StorageJson(IStorage):
         except ValueError:
             return "Rating must be a number, year must be an integer"
 
-        movies[title.title()] = {'year': year, 'rating': rating, 'poster': poster, 'imdb_url': imdb_url}
+        movies[original_title] = {'year': year, 'rating': rating, 'poster': poster, 'imdb_url': imdb_url}
         self._save_movies(movies)
-        return f"Movie '{title}' added successfully."
+        return f"Movie '{original_title}' added successfully."
 
 
     def delete_movie(self, title):
