@@ -34,9 +34,9 @@ class MovieApp:
             except ValueError:
                 print(f"Please enter a valid {type_func.__name__}.")
 
-    def menu(self):
+    def menu(self, username):
         '''updated menu with all actions available '''
-        print("********** Chris' Movies Database **********")
+        print(f"********** {username}' Movies Database **********")
         print("Menu:\n0. Exit \n1. List movies\n2. Add movie"
               "\n3. Delete movie \n4. Update movie\n5. Stats"
               "\n6. Random movie\n7. Search movie "
@@ -196,11 +196,11 @@ class MovieApp:
                 print(f'{title} ({year}): {rating}')
 
 
-    def run(self):
+    def run(self, username):
         """prints the menu and gets the user command and executes it with the according
         dictionary in the beginning of the file"""
         while True:
-          user_input = self.menu()
+          user_input = self.menu(username)
           if user_input == 0:
               print("Bye")
               break

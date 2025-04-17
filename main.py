@@ -34,7 +34,8 @@ def main(filename):
     else:
         print("unsupported format ")
     movie_app = MovieApp(storage)
-    movie_app.run()
+    user_name = filename.split(".")[0].title()
+    movie_app.run(user_name)
 
 
 if __name__ == "__main__":
