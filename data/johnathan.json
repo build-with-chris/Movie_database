@@ -3,13 +3,15 @@
         "year": 1931,
         "rating": 7.8,
         "poster": "https://m.media-amazon.com/images/M/MV5BNDhjNjgxN2EtZGIxZC00NDQzLThmOWMtZDgwNmYwZDQ3MzZiXkEyXkFqcGc@._V1_SX300.jpg",
-        "imdb_url": "https://www.imdb.com/title/tt0021884/"
+        "imdb_url": "https://www.imdb.com/title/tt0021884/",
+        "notes": "hello"
     },
     "12 Angry Men": {
         "year": 1957,
         "rating": 9.0,
         "poster": "https://m.media-amazon.com/images/M/MV5BYjE4NzdmOTYtYjc5Yi00YzBiLWEzNDEtNTgxZGQ2MWVkN2NiXkEyXkFqcGc@._V1_SX300.jpg",
-        "imdb_url": "https://www.imdb.com/title/tt0050083/"
+        "imdb_url": "https://www.imdb.com/title/tt0050083/",
+        "notes": "hiha"
     },
     "Pulp Fiction": {
         "year": 1994,

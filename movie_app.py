@@ -4,10 +4,10 @@ import generate_website
 from statistics import median
 
 
-
 class MovieApp:
-    def __init__(self, storage):
+    def __init__(self, storage, username):
         self._storage = storage
+        self._username = username
         self._actions = actions = {
         1: self._command_list_movies,
         2: self._command_add_movie,
@@ -34,9 +34,9 @@ class MovieApp:
             except ValueError:
                 print(f"Please enter a valid {type_func.__name__}.")
 
-    def menu(self, username):
+    def menu(self):
         '''updated menu with all actions available '''
-        print(f"********** {username}' Movies Database **********")
+        print(f"********** {self._username}' Movies Database **********")
         print("Menu:\n0. Exit \n1. List movies\n2. Add movie"
               "\n3. Delete movie \n4. Update movie\n5. Stats"
               "\n6. Random movie\n7. Search movie "
@@ -83,6 +83,7 @@ class MovieApp:
         title = input("Enter movie title: ")
         notes = input("Enter movie notes: ")
         sucess, message = self._storage.update_movie(title, notes)
+        print(message)
 
 
     def _command_movie_stats(self):
@@ -138,7 +139,8 @@ class MovieApp:
         db = self._storage._load_movies()
         template = generate_website.content_temp('index_template.html')
         movie_cards = generate_website.get_all_movies(db)
-        final_html = template.replace("__TEMPLATE_MOVIE_GRID__", movie_cards)
+        html_heading = template.replace("__NAME__", self._username.title())
+        final_html = html_heading.replace("__TEMPLATE_MOVIE_GRID__", movie_cards)
         generate_website.write_new_html(final_html)
         print("Website was generated successfully.")
 
@@ -196,11 +198,11 @@ class MovieApp:
                 print(f'{title} ({year}): {rating}')
 
 
-    def run(self, username):
+    def run(self):
         """prints the menu and gets the user command and executes it with the according
         dictionary in the beginning of the file"""
         while True:
-          user_input = self.menu(username)
+          user_input = self.menu()
           if user_input == 0:
               print("Bye")
               break
